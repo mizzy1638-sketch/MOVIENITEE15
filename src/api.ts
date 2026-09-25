@@ -17,14 +17,21 @@ export interface GetUploadUrlParams {
 }
 
 export const getApiBaseUrl = (): string => {
-  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_BASE_URL) {
-    return (import.meta.env.VITE_API_BASE_URL as string).replace(/\/+$/, '');
+  const envUrl = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_BASE_URL)
+    ? String(import.meta.env.VITE_API_BASE_URL).trim()
+    : '';
+
+  // If envUrl is valid and not mistakenly set to the GitHub Pages frontend URL, use it
+  if (envUrl && !envUrl.includes('github.io')) {
+    return envUrl.replace(/\/+$/, '');
   }
-  // When hosted on GitHub Pages or custom domain outside Netlify, fallback to production backend
-  if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
+
+  // When hosted on GitHub Pages or if envUrl was pointing to github.io, use the secure Netlify backend
+  if ((typeof window !== 'undefined' && window.location.hostname.includes('github.io')) || (envUrl && envUrl.includes('github.io'))) {
     return 'https://movienitee.netlify.app';
   }
-  // In local dev or Netlify hosting, relative URLs are handled directly
+
+  // In local development or Netlify hosting, relative paths work directly
   return '';
 };
 

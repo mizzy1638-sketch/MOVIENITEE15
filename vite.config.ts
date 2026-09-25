@@ -2,15 +2,16 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(({ mode }) => {
   return {
-    // Subpath base for GitHub Pages production deployments: https://mizzy1638-sketch.github.io/MOVIENITEE/
-    base: process.env.BASE_URL || (mode === 'production' ? '/MOVIENITEE/' : '/'),
+    // Subpath base for GitHub Pages production deployments: https://mizzy1638-sketch.github.io/MOVIENITEE15/
+    base: '/MOVIENITEE15/',
     plugins: [
       {
         name: 'netlify-functions-middleware',
         configureServer(server) {
           server.middlewares.use(async (req, res, next) => {
-            if (req.url && req.url.startsWith('/.netlify/functions/')) {
-              const functionName = req.url.split('?')[0].replace('/.netlify/functions/', '');
+            if (req.url && (req.url.startsWith('/.netlify/functions/') || req.url.startsWith('/MOVIENITEE15/.netlify/functions/'))) {
+              const cleanedUrl = req.url.replace('/MOVIENITEE15', '');
+              const functionName = cleanedUrl.split('?')[0].replace('/.netlify/functions/', '');
               if (functionName === 'get-upload-url' || functionName === 'delete-r2-object') {
                 let body = '';
                 req.on('data', (chunk) => {

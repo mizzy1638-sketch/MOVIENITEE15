@@ -4,13 +4,20 @@
  */
 
 export const getApiBaseUrl = () => {
-  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_BASE_URL) {
-    return import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, '');
+  const envUrl = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_BASE_URL)
+    ? String(import.meta.env.VITE_API_BASE_URL).trim()
+    : '';
+
+  // If envUrl is valid and not mistakenly set to the GitHub Pages frontend URL, use it
+  if (envUrl && !envUrl.includes('github.io')) {
+    return envUrl.replace(/\/+$/, '');
   }
-  // When hosted on GitHub Pages or custom domain, default to the existing secure Netlify backend
-  if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
+
+  // When hosted on GitHub Pages or if envUrl was pointing to github.io, use the secure Netlify backend
+  if ((typeof window !== 'undefined' && window.location.hostname.includes('github.io')) || (envUrl && envUrl.includes('github.io'))) {
     return 'https://movienitee.netlify.app';
   }
+
   // In local development or Netlify hosting, relative paths work directly
   return '';
 };
