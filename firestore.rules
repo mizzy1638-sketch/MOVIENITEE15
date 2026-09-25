@@ -79,5 +79,15 @@ service cloud.firestore {
       allow read: if true;
       allow write: if isAdmin();
     }
+
+    match /site_settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /daily_stats/{statId} {
+      allow read: if true;
+      allow write: if true;
+    }
   }
 }
