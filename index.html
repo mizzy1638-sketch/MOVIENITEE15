@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MOVIENiTEE</title>
+
+    <!-- GitHub Pages Single Page App Redirect Receiver -->
+    <script type="text/javascript">
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&');
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
+
+    <script>
+      // AD-BLOCK DETECTION BYPASS FIX
+      // These variables satisfy the 'AdBlock' checks performed by external video players
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.canRunAds = true;
+      window.isAdBlockActive = false;
+      window.AdBlock = false;
+      window.blocker = false;
+      window.google_ad_client = "ca-pub-test";
+      window.google_ad_status = 1;
+      
+      // Mock the GPT (Google Publisher Tag) library which many players check
+      window.gpt = window.gpt || {
+        pubads: () => ({ 
+          setTargeting: () => {}, 
+          enableSingleRequest: () => {},
+          collapseEmptyDivs: () => {},
+          disableInitialLoad: () => {}
+        }),
+        enableServices: () => {},
+        display: () => {},
+        cmd: []
+      };
+      
+      // Sandbox bypass flag suggested by some embed providers
+      window.isSandboxBypassEnabled = true;
+    </script>
+  </head>
+  <body>
+    <!-- PASSIVE AD-BLOCK DETECTION BYPASS -->
+    <!-- These elements look like ads to anti-adblock detection scripts -->
+    <div id="ad-wrapper-placeholder" style="position: absolute; top: -9999px; left: -9999px; opacity: 0; pointer-events: none;">
+      <div class="ad-banner"></div>
+      <div class="ad-unit"></div>
+      <div class="adsbygoogle"></div>
+      <div class="adsense-ad"></div>
+      <div id="ad-slot"></div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

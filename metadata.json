@@ -1,0 +1,6 @@
+{
+  "name": "MOVIENiTEE",
+  "description": "MOVIENiTEE - The ultimate destination for movie lovers. Stream blockbusters, indie gems, and classics in stunning 4K.",
+  "requestFramePermissions": ["camera", "microphone", "geolocation", "fullscreen", "autoplay", "picture-in-picture", "payment", "clipboard-write", "display-capture", "xr-spatial-tracking", "accelerometer", "gyroscope", "magnetometer", "midi"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
