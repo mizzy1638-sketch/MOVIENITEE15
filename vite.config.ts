@@ -4,6 +4,9 @@ export default defineConfig(({ mode }) => {
   return {
     // Subpath base for GitHub Pages production deployments: https://mizzy1638-sketch.github.io/MOVIENITEE15/
     base: '/MOVIENITEE15/',
+    esbuild: {
+      jsx: 'automatic',
+    },
     plugins: [
       {
         name: 'netlify-functions-middleware',
